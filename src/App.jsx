@@ -1,5 +1,5 @@
 import { app } from './firebase';
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Signup from './components/Signup';
 import Signin from './components/signin';
 import React, { useEffect, useState } from 'react';
@@ -9,21 +9,12 @@ const auth = getAuth(app);
 function App() {
   const [showSignup, setShowSignup] = useState(true);
   const [user, setUser] = useState(null)
-  // const signupUser = () => {
-  //   createUserWithEmailAndPassword(
-  //     auth,
-  //     "moksh.shah.mps@gmail.com",
-  //     "itsmeusingit"
-  //   ).then((value) => console.log(value));
-  // };
 
   useEffect(() => {
     onAuthStateChanged(auth, ((user) => {
       if (user) {
         setUser(user);
       } else {
-        console.log("You're logged out");
-
         setUser(null);
       }
     }))
